@@ -1,4 +1,5 @@
 import FormClient from "@/components/quiz/form";
+import clientPromise from "@/lib/db";
 import { FormModel } from "@/lib/models";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
@@ -9,6 +10,7 @@ interface FormPageProps {
 }
 
 const getForm = cache(async (formId: string) => {
+	await clientPromise;
 	const form = await FormModel.findOne({ formId });
 	if (!form) {
 		return null;

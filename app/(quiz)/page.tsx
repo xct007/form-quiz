@@ -1,9 +1,11 @@
+import clientPromise from "@/lib/db";
 import { FormModel } from "@/lib/models";
 import Link from "next/link";
 
 export const revalidate = 60;
 
 export default async function Home() {
+	await clientPromise;
 	const forms = await FormModel.find().sort({ createdAt: -1 });
 
 	return (

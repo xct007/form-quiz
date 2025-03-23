@@ -1,5 +1,6 @@
 import { auth } from "@/auth";
 import { TableResult } from "@/components/quiz/result";
+import clientPromise from "@/lib/db";
 import { FormModel, ResultModel } from "@/lib/models";
 import Link from "next/link";
 import { redirect } from "next/navigation";
@@ -9,6 +10,7 @@ export default async function DashboardPage() {
 	if (!session) {
 		redirect("/");
 	}
+	await clientPromise;
 
 	const results = await ResultModel.find({ userId: session.user.id }).sort({
 		createdAt: -1,
