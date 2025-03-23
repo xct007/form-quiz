@@ -2,18 +2,19 @@ import FormClient from "@/components/quiz/form";
 import { FormModel } from "@/lib/models";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { cache } from "react";
 
 interface FormPageProps {
 	params: Promise<{ formId: string }>;
 }
 
-const getForm = async (formId: string) => {
+const getForm = cache(async (formId: string) => {
 	const form = await FormModel.findOne({ formId });
 	if (!form) {
 		return null;
 	}
 	return form;
-};
+});
 
 export async function generateMetadata({
 	params,
