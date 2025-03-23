@@ -6,13 +6,7 @@ if (!uri) {
 	throw new Error('Invalid/Missing environment variable: "MONGODB_URI"');
 }
 
-const options: ConnectOptions = {
-	serverApi: {
-		version: "1",
-		strict: true,
-		deprecationErrors: true,
-	},
-};
+const options: ConnectOptions = {};
 
 let clientPromise: Promise<Mongoose>;
 
